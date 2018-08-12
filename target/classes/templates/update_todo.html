@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>TODO Update Form</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/create_update_todo.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<form th:action="@{/todo/list}" method="GET">
+		<button class="btn btn-md btn-warning btn-block" type="Submit">Go
+			To TODO List Page</button>
+	</form>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-4">
+				<form autocomplete="off" action="#" th:action="@{/todo/update}"
+					th:object="${todo}" method="POST" class="form-horizontal"
+					role="form">
+					<h2>TODO Update Form</h2>
+					<input type="hidden" th:field="*{id}"/>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+								class="validation-message"></label> 
+								<input type="text"
+								th:field="*{title}" placeholder="Title" class="form-control"
+								value="${todo.title}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<label th:if="${#fields.hasErrors('description')}"
+								th:errors="*{description}" class="validation-message"></label>
+							<textarea th:field="*{description}" placeholder="Description"
+								class="form-control" th:text="${todo.description}"> </textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block">Update TODO</button>
+						</div>
+					</div>
+					
+<!-- 					<input type="datetime" th:field="*{createdAt}"/> -->
+
+					<span class="success-message" th:utext="${successMessage}"></span>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

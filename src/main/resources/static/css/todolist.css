@@ -1,0 +1,22 @@
+.btn-test {
+	float: right;
+	margin-top: 20px;
+}
+
+.success-message {
+	font-style: normal;
+	font-size: 12px;
+	color: #FF1C19;
+	font-weight: bolder;
+}
+
+.inline-display1 {
+	list-style-type: none;
+	display: inline-flex;
+	margin: 0px;
+    padding: 0px;
+}
+
+.inline-display1 li {
+	margin-right: 2px;
+}

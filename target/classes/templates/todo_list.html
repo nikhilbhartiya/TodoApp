@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Todo List</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/todolist.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+	<div class="container">
+
+		<form th:action="@{/logout}" method="GET">
+			<button class="btn btn-md btn-danger btn-block" name="registration"
+				type="Submit">Logout</button>
+		</form>
+
+		<div class="row">
+			<div class="col-md-6">
+				<h2>Todo List</h2>
+			</div>
+			<div class="col-md-6">
+				<span class="success-message" th:utext="${successMessage}"></span>
+			</div>
+			<div class="col-md-6">
+				<form th:action="@{/todo/create}" method="GET">
+					<button class="btn btn-md btn-primary btn-test" type="Submit">Create
+						TODO</button>
+				</form>
+			</div>
+		</div>
+
+		<div th:if="${not #lists.isEmpty(todos)}">
+			<table class="table table-striped">
+				<tr>
+					<th>Id</th>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Last Updated</th>
+					<th>Action</th>
+				</tr>
+				<tr th:each="todo : ${todos}">
+					<td th:text="${todo.id}"></td>
+					<td th:text="${todo.title}"></td>
+					<td th:text="${todo.description}"></td>
+					<td th:text="${todo.lastUpdated}"></td>
+					<td>
+						<ul class="inline-display1">
+							<li>
+								<form th:action="@{/todo/update/} + ${todo.id}" method="GET">
+									<button class="btn btn-md btn-warning" type="Submit">Edit</button>
+								</form>
+							</li>
+							<li>
+								<form th:action="@{/todo/delete/} + ${todo.id}" method="POST">
+									<button onclick="return confirm('Do you really want to Delete?');" class="btn btn-md btn-danger"
+										type="Submit">Delete</button>
+								</form>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+
+	<script>
+		function callAlert() {
+			alert("Are you sure!");
+		}
+	</script>
+
+</body>
+</html>
